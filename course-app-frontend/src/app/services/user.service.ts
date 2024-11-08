@@ -44,8 +44,8 @@ this.currentUser = this.currentUserSubject.asObservable();
   }
 
   logout(): Observable<any>{
-    // return this.http.post(API_URL + "logoutt", {}).pipe(
-      return this.http.get(API_URL + "test", {responseType: 'text'}).pipe(
+    return this.http.post(API_URL + "logoutt", {}).pipe(
+      // return this.http.get(API_URL + "test", {responseType: 'text'}).pipe(
       map(response => {
         localStorage.removeItem('currentUser');
         // this.currentUserSubject.next(null);
