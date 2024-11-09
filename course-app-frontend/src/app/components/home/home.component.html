@@ -1,9 +1,10 @@
 <div class="container">
-    <div class="alert alert-danger" *ngIf="errorMessage">
-        <strong>Error!</strong> {{errorMessage}}
+    <div class="error-message" *ngIf="errorMessage">
+        {{errorMessage}}
     </div>
-    <div class="alert alert-success" *ngIf="infoMessage">
-        <strong>Successful!</strong> {{infoMessage}}
+    <!-- <div class="alert alert-success" *ngIf="infoMessage"> -->
+        <div class="success-message" *ngIf="infoMessage">
+        {{infoMessage}}
     </div>
     <div class="course-container">
         <div class="card">

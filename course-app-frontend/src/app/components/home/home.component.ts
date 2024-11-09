@@ -17,8 +17,8 @@ import { TooltipDirective } from '../../common/ui/tooltip.directive';
 })
 export class HomeComponent implements OnInit {
   courseList!: Array<Course>;
-  errorMessage!: string;
-  infoMessage!: string;
+  errorMessage: string | null = null;
+  infoMessage: string | null = null;
   currentUser: User | null;
 
 
@@ -48,8 +48,14 @@ export class HomeComponent implements OnInit {
     
     this.courseService.enroll(transaction).subscribe(data => {
       this.infoMessage = "Course succesfully enrolled!";
+      setTimeout(() => {
+        this.infoMessage = null;
+      }, 3000);
     }, err => {
-      this.errorMessage = "Unexpected error occured.";
+      this.errorMessage = "Could not enroll the course. Please try again later.";
+      setTimeout(() => {
+        this.errorMessage = null;
+      }, 5000);
     });
   }
 
