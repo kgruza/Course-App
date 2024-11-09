@@ -6,11 +6,12 @@ import { Transaction } from '../../models/transaction';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { CommonModule, DatePipe } from '@angular/common';
+import { TooltipDirective } from '../../common/ui/tooltip.directive';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [CommonModule, DatePipe, TooltipDirective],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

@@ -36,8 +36,10 @@
                             <td>{{item.category}}</td>
                             <td>{{item.publishDate | date:"MMM d, y"}}</td>
                             <td>
-                                <button class="btn btn-info" (click)="enroll(item)">Enroll</button>
-                            </td>
+                                <div appTooltip="You have to log in to enroll a course" [isUserLoggedIn]="!!currentUser" style="display: inline-block; position: relative; width: 100%; height: 100%;">
+                            <button [disabled]="!currentUser"  class="btn btn-info" (click)="enroll(item)">Enroll</button>
+                        </div>    
+                        </td>
                             <td>
                                 <button class="btn btn-success" (click)="detail(item)">Detail</button>
                             </td>
