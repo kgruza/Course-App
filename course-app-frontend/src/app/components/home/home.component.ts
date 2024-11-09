@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   courseList!: Array<Course>;
   errorMessage!: string;
   infoMessage!: string;
-  currentUser: User;
+  currentUser: User | null;
 
 
   constructor(private userService: UserService, private courseService: CourseService, private router: Router){

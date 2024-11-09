@@ -12,16 +12,16 @@ let API_URL="http://localhost:8765/user-service/service/";
 })
 export class UserService {
 
-public currentUser: Observable<User>;
-private currentUserSubject: BehaviorSubject<User>;
+public currentUser: Observable<User | null>;
+private currentUserSubject: BehaviorSubject<User | null>;
 
   constructor(private http: HttpClient) {
-this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')!));
+this.currentUserSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser')!));
 this.currentUser = this.currentUserSubject.asObservable();
 
    }
 
-   public get currentUserValue(): User{
+   public get currentUserValue(): User | null{
     return this.currentUserSubject.value;
    }
 
@@ -48,7 +48,7 @@ this.currentUser = this.currentUserSubject.asObservable();
       // return this.http.get(API_URL + "test", {responseType: 'text'}).pipe(
       map(response => {
         localStorage.removeItem('currentUser');
-        // this.currentUserSubject.next(null);
+        this.currentUserSubject.next(null);
       })
     );
   }

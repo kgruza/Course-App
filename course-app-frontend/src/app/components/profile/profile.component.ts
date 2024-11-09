@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit{
-  currentUser: User;
+  currentUser: User | null;
   transactionList!: Array<Transaction>;
   
 
@@ -31,7 +31,7 @@ return;
   }
 
   findTransactionsOfUser(){
-    this.courseService.findTransactionsOfUser(this.currentUser.id).subscribe(data =>{
+    this.courseService.findTransactionsOfUser(this.currentUser!.id).subscribe(data =>{
       this.transactionList = data;
     })
   }

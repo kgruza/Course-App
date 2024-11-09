@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './navigation.component.css'
 })
 export class NavigationComponent {
-  currentUser!: User;
+  currentUser!: User | null;
 
   constructor(private userService: UserService, private router: Router){
     this.userService.currentUser.subscribe(data =>{
