@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
   infoMessage: string | null = null;
   currentUser: User | null;
 
-
   constructor(private userService: UserService, private courseService: CourseService, private router: Router){
     this.currentUser = this.userService.currentUserValue;
 
@@ -47,12 +46,17 @@ export class HomeComponent implements OnInit {
     transaction.course = course;
     
     this.courseService.enroll(transaction).subscribe(data => {
-      this.infoMessage = "Course succesfully enrolled!";
+      this.setInfoMessage("Course succesfully enrolled!");
       setTimeout(() => {
         this.infoMessage = null;
       }, 3000);
     }, err => {
-      this.errorMessage = "Could not enroll the course. Please try again later.";
+      if(err.status == 409){
+        this.setErrorMessage("This course was already enrolled.");
+        }
+      else{
+        this.setErrorMessage("Could not enroll the course. Please try again later.");
+       }
       setTimeout(() => {
         this.errorMessage = null;
       }, 5000);
@@ -64,4 +68,16 @@ export class HomeComponent implements OnInit {
     localStorage.setItem("currentCourse", JSON.stringify(course));
     this.router.navigate(['/detail', course.id]);
   }
+
+  setInfoMessage(message:string){
+    this.errorMessage = null;
+    this.infoMessage = message;
+  }
+
+  setErrorMessage(message:string){
+    this.infoMessage = null;
+    this.errorMessage = message;
+  }
+
+
 }

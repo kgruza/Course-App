@@ -1,5 +1,6 @@
 package com.kgruza.microservice_course_management.service;
 
+import com.kgruza.microservice_course_management.exceptions.CourseAlreadyEnrolledException;
 import com.kgruza.microservice_course_management.model.Course;
 import com.kgruza.microservice_course_management.model.Transaction;
 import com.kgruza.microservice_course_management.repository.CourseRepository;
@@ -40,6 +41,11 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Transaction saveTransaction(Transaction transaction) {
+        List<Transaction> transactions = findTransactionsOfUser(transaction.getUserId());
+        if (transactions.stream().anyMatch(t -> t.getCourse().getId().equals(transaction.getCourse().getId())))
+            throw new CourseAlreadyEnrolledException("This course was already enrolled.");
         return transactionRepository.save(transaction);
     }
+
+
 }
